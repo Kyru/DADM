@@ -85,7 +85,11 @@
     </session>
   </component>
   <component name="FileEditorManager">
+<<<<<<< Updated upstream
     <leaf>
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+>>>>>>> Stashed changes
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/local.properties">
           <provider selected="true" editor-type-id="text-editor">
@@ -288,7 +292,10 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor" />
+<<<<<<< Updated upstream
       <provider selected="true" editor-type-id="android-designer2" />
+=======
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/fyq/example/labdadm/labs/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
