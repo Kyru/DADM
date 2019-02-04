@@ -1,6 +1,9 @@
 .gradle
 /build/
 
+# Ignore Local Properties
+local.properties
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
