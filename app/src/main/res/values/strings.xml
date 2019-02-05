@@ -16,5 +16,5 @@
     <string name="about_info">Quotation Shake by \n\n Ferran and Coque\n\n
         ferdemar@inf.upv.es\n rojarcho@inf.upv.es\n\n2k19</string>
 
-    <!-- test -->
+    <string name="bt_author_info">Author Info</string>
 </resources>
