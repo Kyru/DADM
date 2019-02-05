@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity" android:label=""/>
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".FavouriteActivity" android:label="@string/bt_favquot_st">
+        <activity android:name=".SettingsActivity" android:label="@string/title_settings"/>
+        <activity android:name=".AboutActivity" android:label="@string/title_about" />
+        <activity android:name=".FavouriteActivity" android:label="@string/title_favquot">
         </activity>
         <activity android:name=".DashboardActivity">
             <intent-filter>
