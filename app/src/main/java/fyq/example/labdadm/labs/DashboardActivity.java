@@ -15,7 +15,13 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void goTo(View view){
-        Intent intent = new Intent(this, AboutActivity.class);
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.bt_about:
+                intent = new Intent(this, AboutActivity.class);
+                break;
+            default: intent = new Intent(this, DashboardActivity.class);
+        }
         startActivity(intent);
     }
 }
