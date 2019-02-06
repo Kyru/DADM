@@ -17,4 +17,18 @@
         ferdemar@inf.upv.es\n rojarcho@inf.upv.es\n\n2k19</string>
 
     <string name="bt_author_info">Author Info</string>
+
+    <string name="st_username">Name to identify the user</string>
+
+    <string name="st_name">Insert your name</string>
+
+    <string name="st_language">Language of the quotations</string>
+
+    <string name="st_httpmethod">HTTP method to be used in Web Requests</string>
+
+    <string name="st_get">GET</string>
+
+    <string name="st_post">POST</string>
+
+
 </resources>

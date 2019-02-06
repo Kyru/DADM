@@ -25,7 +25,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/st_username"
                 android:layout_marginTop="16dp"/>
 
             <EditText
@@ -33,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="@string/st_name"
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:layout_marginTop="8dp"/>
@@ -41,7 +42,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/st_language"
                 android:layout_marginTop="16dp"
                 />
 
@@ -55,7 +56,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/st_httpmethod"
                 android:layout_marginTop="16dp" />
 
             <RadioGroup
@@ -68,13 +69,17 @@
                     android:id="@+id/radiobutton1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    android:checked="true"
+                    android:text="@string/st_get"
+                    />
 
                 <RadioButton
                     android:id="@+id/radiobutton2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    android:text="@string/st_post"/>
             </RadioGroup>
 
         </LinearLayout>

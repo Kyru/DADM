@@ -23,6 +23,9 @@ public class DashboardActivity extends AppCompatActivity {
             case R.id.bt_favquot:
                 intent = new Intent(this, FavouriteActivity.class);
                 break;
+            case R.id.bt_settings:
+                intent = new Intent(this, SettingsActivity.class);
+                break;
             default: intent = new Intent(this, DashboardActivity.class);
         }
         startActivity(intent);
