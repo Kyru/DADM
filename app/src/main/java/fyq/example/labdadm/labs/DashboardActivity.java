@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Queue;
+
 public class DashboardActivity extends AppCompatActivity {
 
     @Override
@@ -25,6 +27,9 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
             case R.id.bt_settings:
                 intent = new Intent(this, SettingsActivity.class);
+                break;
+            case R.id.bt_getquot:
+                intent = new Intent(this, QuotationActivity.class);
                 break;
             default: intent = new Intent(this, DashboardActivity.class);
         }

@@ -18,6 +18,12 @@
 
     <string name="bt_author_info">Author Info</string>
 
+    <string name="tv_quote">Hello %1s!\nPress Refresh to get a new quotation</string>
+
+    <string name="tv_sample_quote">This is a sample quotation</string>
+
+    <string name="tv_sample_author">This is a sample author</string>
+
     <string name="st_username">Name to identify the user</string>
 
     <string name="st_name">Insert your name</string>
