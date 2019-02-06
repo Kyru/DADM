@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bt_getquot_st">OBTENER FRASES</string>
+    <string name="title_getquot">Frases aleatorias</string>
+    <string name="bt_favquot_st">FRASES FAVORITAS</string>
+    <string name="title_favquot">Frases favoritas</string>
+    <string name="bt_settings_st">AJUSTES</string>
+    <string name="title_settings">Ajustes</string>
+    <string name="bt_about_st">SOBRE NOSOTROS</string>
+    <string name="title_about">Sobre nosotros</string>
+
+    <string name="about_info">Quotation Shake por \n\n Ferran y Coque\n\n
+        ferdemar@inf.upv.es\n rojarcho@inf.upv.es\n\n2k19</string>
+
+    <string name="bt_author_info">Información del autor</string>
+
+    <string name="tv_quote">Hola %1s!\nPress Actualiza para obtener una nueva frase</string>
+
+    <string name="tv_sample_quote">Esto es una frase de prueba</string>
+
+    <string name="tv_sample_author">Esto es un autor de prueba</string>
+
+    <string name="st_username">Nombre para identificar al usuario</string>
+
+    <string name="st_name">Inserta tu nombre</string>
+    <string name="st_name2">Nombre</string>
+
+    <string name="st_language">Idioma de las frases</string>
+
+    <string name="st_httpmethod">Método HTTP para usar en las peticiones Web</string>
+
+    <string name="st_get">GET</string>
+
+    <string name="st_post">POST</string>
+</resources>

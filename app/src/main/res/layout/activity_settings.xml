@@ -35,7 +35,7 @@
                 android:ems="10"
                 android:hint="@string/st_name"
                 android:inputType="textPersonName"
-                android:text="Name"
+                android:text="@string/st_name2"
                 android:layout_marginTop="8dp"/>
 
             <TextView
