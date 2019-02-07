@@ -36,6 +36,8 @@
     <string name="st_get">GET</string>
 
     <string name="st_post">POST</string>
+    <string name="st_english">English</string>
+    <string name="st_russian">Russian</string>
 
 
 </resources>
