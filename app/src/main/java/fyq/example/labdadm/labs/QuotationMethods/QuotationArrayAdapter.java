@@ -19,7 +19,7 @@ public class QuotationArrayAdapter extends ArrayAdapter {
 
     public QuotationArrayAdapter(Context context, int layout, List<Quotation> quotationList){
         super(context, layout, quotationList);
-        layout = this.layout;
+        this.layout = layout;
 
     }
 
@@ -68,12 +68,14 @@ public class QuotationArrayAdapter extends ArrayAdapter {
         TextView tv_quoteAuthor = resViewHolder.getTv_quoteAuthor();
         TextView tv_quoteText = resViewHolder.getTv_quoteText();
 
-        //resViewHolder.setTv_quoteAuthor(this.getItem(position));
+        Quotation quotation = (Quotation) getItem(position);
+        tv_quoteAuthor.setText(quotation.getQuoteAuthor());
+        tv_quoteText.setText(quotation.getQuoteText());
 
-
+        return view;
 
 
     }
 
 }
-}
+

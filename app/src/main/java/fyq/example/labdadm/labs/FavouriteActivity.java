@@ -5,6 +5,11 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import fyq.example.labdadm.labs.QuotationMethods.QuotationArrayAdapter;
 
 public class FavouriteActivity extends AppCompatActivity {
 
@@ -14,6 +19,11 @@ public class FavouriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
+        QuotationArrayAdapter quotationArrayAdapter =
+                new QuotationArrayAdapter(this, R.layout.quotation_list_row, getMockQuotations());
+
+        ListView listView = findViewById(R.id.lv_quotations);
+        listView.setAdapter(quotationArrayAdapter);
 
     }
 
@@ -29,4 +39,15 @@ public class FavouriteActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public ArrayList<Quotation> getMockQuotations(){
+
+        ArrayList<Quotation> mockListQuotation = new ArrayList<>();
+        Quotation mockQuotation = new Quotation("This is a mock quotation", "F");
+        for (int i = 0; i < 10; i++){
+            mockListQuotation.add(mockQuotation);
+        }
+        return mockListQuotation;
+    }
+
 }
