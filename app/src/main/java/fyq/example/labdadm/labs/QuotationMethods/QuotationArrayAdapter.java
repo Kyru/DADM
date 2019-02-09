@@ -74,8 +74,6 @@ public class QuotationArrayAdapter extends ArrayAdapter {
         tv_quoteText.setText(quotation.getQuoteText());
 
         return view;
-
-
     }
 
 }

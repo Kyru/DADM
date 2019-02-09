@@ -1,8 +1,10 @@
 package fyq.example.labdadm.labs;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Debug;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +30,7 @@ public class FavouriteActivity extends AppCompatActivity {
         QuotationArrayAdapter quotationArrayAdapter =
                 new QuotationArrayAdapter(this, R.layout.quotation_list_row, getMockQuotations());
 
-        ListView listView = findViewById(R.id.lv_quotations);
+        final ListView listView = findViewById(R.id.lv_quotations);
         listView.setAdapter(quotationArrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -43,8 +45,36 @@ public class FavouriteActivity extends AppCompatActivity {
                 } else {
                     findAuthor(view, quotationAuthor);
                 }
+            }
+        });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, final View view, final int position, long id) {
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(FavouriteActivity.this);
+                builder.setIcon(android.R.drawable.stat_sys_warning);
+                builder.setMessage(R.string.st_alert_dialog);
+                builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }
+                );
+                builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        parent.removeViewInLayout(view);
+                        //parent.removeViewInLayout(view)
+                        //listView.removeViewAt(position)
+                        //listView.removeView(view)
+                        //notify();
+                    }
+                });
+
+                builder.create().show();
+                return true;
             }
         });
 
