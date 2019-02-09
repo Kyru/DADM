@@ -39,15 +39,9 @@ public class QuotationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.getquot_item:
-                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        tv_author.setText(getResources().getString(R.string.tv_sample_author));
-                        tv_quote.setText(getResources().getString(R.string.tv_sample_quote));
-                        return true;
-                    }
-                });
-                break;
+                tv_author.setText(getResources().getString(R.string.tv_sample_author));
+                tv_quote.setText(getResources().getString(R.string.tv_sample_quote));
+                return super.onOptionsItemSelected(item);
             case R.id.addtofav_item:
                 break;
         }

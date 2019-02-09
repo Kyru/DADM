@@ -40,6 +40,9 @@
     <string name="st_russian">Russian</string>
     <string name="st_add">Add</string>
     <string name="st_refresh">Refresh</string>
+    <string name="st_clearall">Clear all</string>
+    <string name="st_alert_clearalldialog">Are you sure that you want to delete ALL your favourite quotations?</string>
+
 
     <string name="st_alert_dialog">Are you sure that you want to delete this quotation?</string>
 

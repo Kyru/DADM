@@ -37,4 +37,7 @@
     <string name="st_alert_dialog">¿Está seguro de que quiere borrar esta frase?</string>
     <string name="st_add">Añadir</string>
     <string name="st_refresh">Actualizar</string>
+    <string name="st_clearall">Borrar todo</string>
+    <string name="st_alert_clearalldialog">¿Estás seguro de que quieres borrar TODAS las frases favoritas?</string>
+
 </resources>

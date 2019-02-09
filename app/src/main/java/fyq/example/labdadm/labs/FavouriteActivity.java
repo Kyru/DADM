@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,17 +22,17 @@ import java.util.ArrayList;
 import fyq.example.labdadm.labs.QuotationMethods.QuotationArrayAdapter;
 
 public class FavouriteActivity extends AppCompatActivity {
-
-
+    ListView listView;
+    QuotationArrayAdapter quotationArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
-        QuotationArrayAdapter quotationArrayAdapter =
+        quotationArrayAdapter =
                 new QuotationArrayAdapter(this, R.layout.quotation_list_row, getMockQuotations());
 
-        final ListView listView = findViewById(R.id.lv_quotations);
+        listView = findViewById(R.id.lv_quotations);
         listView.setAdapter(quotationArrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -113,4 +115,37 @@ public class FavouriteActivity extends AppCompatActivity {
         return mockListQuotation;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menufavquot, menu);
+        if(quotationArrayAdapter.isEmpty()) menu.getItem(R.id.clearall).setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.clearall:
+                AlertDialog.Builder builderClear = new AlertDialog.Builder(FavouriteActivity.this);
+                builderClear.setIcon(android.R.drawable.stat_sys_warning);
+                builderClear.setMessage(R.string.st_alert_clearalldialog);
+                builderClear.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }
+                );
+                builderClear.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        quotationArrayAdapter.clear();
+                    }
+                });
+
+                builderClear.create().show();
+                break;
+        }
+        return true;
+    }
 }
