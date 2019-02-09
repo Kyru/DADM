@@ -28,10 +28,8 @@ public class QuotationActivity extends AppCompatActivity {
         String newQuote = quote.replace("%1s", authorName);
 
         tv_quote.setText(newQuote);
-
-
     }
-
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuquotations, menu);
         return true;
@@ -39,22 +37,21 @@ public class QuotationActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item){
-
-
-
-            
+        switch(item.getItemId()){
+            case R.id.getquot_item:
+                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        tv_author.setText(getResources().getString(R.string.tv_sample_author));
+                        tv_quote.setText(getResources().getString(R.string.tv_sample_quote));
+                        return true;
+                    }
+                });
+                break;
+            case R.id.addtofav_item:
+                break;
         }
-
-        Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
         return true;
-    }
-
-    public void refreshQuote (View view){
-
-        tv_author.setText(getResources().getString(R.string.tv_sample_author));
-        tv_quote.setText(getResources().getString(R.string.tv_sample_quote));
-
     }
 
 
