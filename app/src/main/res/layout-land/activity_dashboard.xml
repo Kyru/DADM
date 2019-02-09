@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
+                android:background="@color/button_color"
                 android:layout_weight="1"
                 android:onClick="goTo"
                 android:text="@string/bt_getquot_st" />
@@ -35,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
+                android:background="@color/button_color"
                 android:layout_weight="1"
                 android:onClick="goTo"
                 android:text="@string/bt_favquot_st" />
@@ -52,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
+                android:background="@color/button_color"
                 android:layout_weight="1"
                 android:onClick="goTo"
                 android:text="@string/bt_settings_st" />
@@ -61,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/button_color"
                 android:onClick="goTo"
                 android:layout_margin="4dp"
                 android:text="@string/bt_about_st" />
