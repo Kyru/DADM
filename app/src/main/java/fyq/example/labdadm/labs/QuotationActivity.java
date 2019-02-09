@@ -2,8 +2,11 @@ package fyq.example.labdadm.labs;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QuotationActivity extends AppCompatActivity {
 
@@ -27,6 +30,24 @@ public class QuotationActivity extends AppCompatActivity {
         tv_quote.setText(newQuote);
 
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuquotations, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item){
+
+
+
+            
+        }
+
+        Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     public void refreshQuote (View view){

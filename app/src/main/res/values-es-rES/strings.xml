@@ -34,7 +34,7 @@
     <string name="st_post">POST</string>
     <string name="st_english">Inglés</string>
     <string name="st_russian">Ruso</string>
-
     <string name="st_alert_dialog">¿Está seguro de que quiere borrar esta frase?</string>
-
+    <string name="st_add">Añadir</string>
+    <string name="st_refresh">Actualizar</string>
 </resources>
