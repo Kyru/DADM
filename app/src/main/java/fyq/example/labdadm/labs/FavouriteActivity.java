@@ -117,14 +117,16 @@ public class FavouriteActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if(quotationArrayAdapter.getCount()==0) menu.findItem(R.id.clearall).setVisible(false);
         getMenuInflater().inflate(R.menu.menufavquot, menu);
-        if(quotationArrayAdapter.isEmpty()) menu.getItem(R.id.clearall).setVisible(false);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+            case android.R.id.home:
+                return super.onOptionsItemSelected(item);
             case R.id.clearall:
                 AlertDialog.Builder builderClear = new AlertDialog.Builder(FavouriteActivity.this);
                 builderClear.setIcon(android.R.drawable.stat_sys_warning);
@@ -141,6 +143,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         quotationArrayAdapter.clear();
                     }
+
                 });
 
                 builderClear.create().show();

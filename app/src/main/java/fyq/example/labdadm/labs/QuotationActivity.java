@@ -38,6 +38,7 @@ public class QuotationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+            case android.R.id.home: return super.onOptionsItemSelected(item);
             case R.id.getquot_item:
                 tv_author.setText(getResources().getString(R.string.tv_sample_author));
                 tv_quote.setText(getResources().getString(R.string.tv_sample_quote));
