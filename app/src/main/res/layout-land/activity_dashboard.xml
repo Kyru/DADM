@@ -29,6 +29,7 @@
                 android:background="@color/button_color"
                 android:layout_weight="1"
                 android:onClick="goTo"
+                android:textColor="@color/button_text_color"
                 android:text="@string/bt_getquot_st" />
 
             <Button
@@ -39,6 +40,7 @@
                 android:background="@color/button_color"
                 android:layout_weight="1"
                 android:onClick="goTo"
+                android:textColor="@color/button_text_color"
                 android:text="@string/bt_favquot_st" />
 
         </LinearLayout>
@@ -57,6 +59,7 @@
                 android:background="@color/button_color"
                 android:layout_weight="1"
                 android:onClick="goTo"
+                android:textColor="@color/button_text_color"
                 android:text="@string/bt_settings_st" />
 
             <Button
@@ -67,6 +70,7 @@
                 android:background="@color/button_color"
                 android:onClick="goTo"
                 android:layout_margin="4dp"
+                android:textColor="@color/button_text_color"
                 android:text="@string/bt_about_st" />
         </LinearLayout>
 

@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-   <button_color>
-    <item android:state_pressed="true">
+    <item android:state_pressed="true" android:color="@color/colorPrimaryDark">
         <shape android:shape="rectangle">
             <solid android:color="@color/colorAccent" />
             <corners android:radius="10dp" />
             <stroke android:width="5dp" android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
-    <item>
+    <item android:color="@color/colorPrimaryDark">
         <shape android:shape="rectangle">
             <solid android:color="@color/colorPrimary" />
             <corners android:radius="10dp" />
             <stroke android:width="5dp" android:color="@color/colorPrimaryDark" />
         </shape>
     </item>
-   </button_color>
 </selector>
