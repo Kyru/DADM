@@ -67,11 +67,7 @@ public class FavouriteActivity extends AppCompatActivity {
                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        parent.removeViewInLayout(view);
-                        //parent.removeViewInLayout(view)
-                        //listView.removeViewAt(position)
-                        //listView.removeView(view)
-                        //notify();
+                        quotationArrayAdapter.remove((Quotation) parent.getItemAtPosition(position));
                     }
                 });
 
