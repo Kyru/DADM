@@ -113,8 +113,8 @@ public class FavouriteActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(quotationArrayAdapter.getCount()==0) menu.findItem(R.id.clearall).setVisible(false);
         getMenuInflater().inflate(R.menu.menufavquot, menu);
+        if(quotationArrayAdapter.getCount()==0) menu.findItem(R.id.clearall).setVisible(false);
         return true;
     }
 
@@ -138,13 +138,15 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         quotationArrayAdapter.clear();
+                        supportInvalidateOptionsMenu();
                     }
 
                 });
-
                 builderClear.create().show();
                 break;
         }
+
+
         return true;
     }
 }
