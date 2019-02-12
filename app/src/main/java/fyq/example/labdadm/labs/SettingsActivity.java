@@ -8,10 +8,17 @@ import android.widget.EditText;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    EditText editTextName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        editTextName = findViewById(R.id.editText_Name);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editTextName.setText(prefs.getString("name", ""));
     }
 
     @Override
@@ -20,7 +27,8 @@ public class SettingsActivity extends AppCompatActivity {
                 PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
 
-        EditText editTextName = findViewById(R.id.editText_Name);
+
+
         if(editTextName.getText().toString().equals("") || editTextName.getText().toString() == null ){
             editor.remove("name");
         } else {
