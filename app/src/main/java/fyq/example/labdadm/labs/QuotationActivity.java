@@ -1,5 +1,7 @@
 package fyq.example.labdadm.labs;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,7 +21,9 @@ public class QuotationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quotation);
 
-        authorName = "Nameless One";
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        authorName = prefs.getString("name", "Nameless One");
 
         tv_quote = findViewById(R.id.tv_quote);
         tv_author = findViewById(R.id.tv_author);
@@ -28,6 +32,9 @@ public class QuotationActivity extends AppCompatActivity {
         String newQuote = quote.replace("%1s", authorName);
 
         tv_quote.setText(newQuote);
+
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
