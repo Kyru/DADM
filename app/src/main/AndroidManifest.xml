@@ -9,22 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuotationActivity"
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".DashboardActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fyq.example.labdadm.labs.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".QuotationActivity"
             android:label="@string/title_getquot"
             android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DashboardActivity"
-                />
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_settings"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:parentActivityName=".DashboardActivity">
-            <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".DashboardActivity"/>
+                android:value=".DashboardActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
@@ -32,7 +32,7 @@
             android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DashboardActivity"/>
+                android:value=".DashboardActivity" />
         </activity>
         <activity
             android:name=".FavouriteActivity"
@@ -40,7 +40,7 @@
             android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DashboardActivity"/>
+                android:value=".DashboardActivity" />
         </activity>
         <activity android:name=".DashboardActivity">
             <intent-filter>

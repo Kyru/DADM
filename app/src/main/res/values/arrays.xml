@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="languages">
+    <array name="languages_intern">
         <item>@string/st_english</item>
         <item>@string/st_russian</item>
     </array>
+    <array name="methods_http_intern">
+        <item>@string/st_get</item>
+        <item>@string/st_post</item>
+    </array>
+    <array name="languages_show">
+        <item>@string/st_english</item>
+        <item>@string/st_russian</item>
+    </array>
+    <array name="methods_http_show">
+        <item>@string/st_get</item>
+        <item>@string/st_post</item>
+    </array>
+
 </resources>

@@ -40,4 +40,5 @@
     <string name="st_clearall">Borrar todo</string>
     <string name="st_alert_clearalldialog">¿Estás seguro de que quieres borrar TODAS las frases favoritas?</string>
 
+    <string name="st_category_web">Categoría servicios web</string>
 </resources>
