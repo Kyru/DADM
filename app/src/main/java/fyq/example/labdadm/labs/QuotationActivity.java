@@ -23,7 +23,7 @@ public class QuotationActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        authorName = prefs.getString("name", "Nameless One");
+        authorName = prefs.getString("edit_text_preference_username", "Nameless One");
 
         tv_quote = findViewById(R.id.tv_quote);
         tv_author = findViewById(R.id.tv_author);
