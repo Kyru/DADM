@@ -15,6 +15,8 @@ public class QuotationActivity extends AppCompatActivity {
     TextView tv_quote;
     TextView tv_author;
     String authorName;
+    int num_frases=0;
+    boolean add_visible=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +35,12 @@ public class QuotationActivity extends AppCompatActivity {
 
         tv_quote.setText(newQuote);
 
-
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuquotations, menu);
+        menu.findItem(R.id.addtofav_item).setVisible(true);
+        add_visible=true;
         return true;
     }
 
@@ -47,13 +49,26 @@ public class QuotationActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case android.R.id.home: return super.onOptionsItemSelected(item);
             case R.id.getquot_item:
-                tv_author.setText(getResources().getString(R.string.tv_sample_author));
-                tv_quote.setText(getResources().getString(R.string.tv_sample_quote));
+                tv_author.setText(getResources().getString(R.string.tv_sample_author).replace("%1$d"," "+num_frases));
+                tv_quote.setText(getResources().getString(R.string.tv_sample_quote).replace("%1$d"," "+num_frases));
+                num_frases++;
                 return super.onOptionsItemSelected(item);
             case R.id.addtofav_item:
+                item.setVisible(false);
+                add_visible=false;
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+            super.onSaveInstanceState(savedInstanceState);
+            savedInstanceState.putString(tv_quote);
+            savedInstanceState.putString(tv_author);
+            savedInstanceState.putInt(num_frases);
+            savedInstanceState.putBoolean(add_visible);
+
     }
 
 

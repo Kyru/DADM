@@ -16,9 +16,9 @@
 
     <string name="tv_quote">Hola %1s!\nPress Actualiza para obtener una nueva frase</string>
 
-    <string name="tv_sample_quote">Esto es una frase de prueba</string>
+    <string name="tv_sample_quote">Frase de prueba %1$d</string>
 
-    <string name="tv_sample_author">Esto es un autor de prueba</string>
+    <string name="tv_sample_author">Autor de prueba %1$d</string>
 
     <string name="st_username">Nombre para identificar al usuario</string>
 

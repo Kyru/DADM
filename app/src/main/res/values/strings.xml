@@ -20,9 +20,9 @@
 
     <string name="tv_quote">Hello %1s!\nPress Refresh to get a new quotation</string>
 
-    <string name="tv_sample_quote">This is a sample quotation</string>
+    <string name="tv_sample_quote">Sample quotation %1$d</string>
 
-    <string name="tv_sample_author">This is a sample author</string>
+    <string name="tv_sample_author">Sample author %1$d</string>
 
     <string name="st_username">Name to identify the user</string>
 
