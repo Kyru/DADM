@@ -41,4 +41,25 @@
     <string name="st_alert_clearalldialog">¿Estás seguro de que quieres borrar TODAS las frases favoritas?</string>
 
     <string name="st_category_web">Categoría servicios web</string>
+
+    <string name="st_default_username">Nameless One</string>
+
+    <string name="st_edit_text_preference_username_title">Nombre de Usuario</string>
+    <string name="st_edit_text_preference_username_hint">Nombre que identifica al usuario</string>
+
+    <string name="st_preference_category_web_services_title">
+        Servicios Web
+    </string>
+
+    <string name="st_list_preference_language_title">Idioma de las frases</string>
+    <string name="st_list_preference_language_hint">
+        Las frases se recibirán en el idioma seleccionado
+    </string>
+
+    <string name="st_list_preference_request_method_title">Método de petición HTTP</string>
+    <string name="st_list_preference_request_method_hint">
+        Las peticiones web se harán utilizando el método HTTP seleccionado
+    </string>
+
+
 </resources>

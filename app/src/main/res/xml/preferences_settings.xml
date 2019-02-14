@@ -2,24 +2,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue="Default value"
+        android:defaultValue="@string/st_default_username"
         android:key="edit_text_preference_username"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Edit text preference" />
-    <PreferenceCategory android:title="Preference category">
+        android:title="@string/st_edit_text_preference_username_title"
+        android:summary="@string/st_edit_text_preference_username_hint"/>
+    <PreferenceCategory
+        android:title="@string/st_preference_category_web_services_title">
 
         <ListPreference
             android:defaultValue="1"
-            android:entries="@string/st_language"
-            android:entryValues="@array/languages_show"
+            android:entries="@array/languages_show"
+            android:entryValues="@array/languages_intern"
             android:key="list_preference_languages"
-            android:title="List preference" />
+            android:summary="@string/st_list_preference_language_hint"
+            android:title="@string/st_list_preference_language_title"/>
         <ListPreference
             android:defaultValue="1"
-            android:entries="@string/st_httpmethod"
-            android:entryValues="@array/methods_http_show"
+            android:entries="@array/methods_http_show"
+            android:entryValues="@array/methods_http_intern"
             android:key="list_preference_methods_http"
-            android:title="List preference" />
+            android:title="@string/st_list_preference_request_method_title"
+            android:summary="@string/st_list_preference_request_method_hint"/>
     </PreferenceCategory>
 </PreferenceScreen>

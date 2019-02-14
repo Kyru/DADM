@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
+            android:label="@string/title_settings"
             android:parentActivityName=".DashboardActivity"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data

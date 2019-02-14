@@ -46,6 +46,25 @@
 
     <string name="st_category_web">Category web services</string>
 
+    <string name="st_default_username">Nameless One</string>
+
+    <string name="st_edit_text_preference_username_title">Username</string>
+    <string name="st_edit_text_preference_username_hint">Name that identifies the user</string>
+
+    <string name="st_preference_category_web_services_title">
+        Web Service
+    </string>
+
+    <string name="st_list_preference_language_title">Quotation Language</string>
+    <string name="st_list_preference_language_hint">
+        Quotations will be received in the selected language
+    </string>
+
+    <string name="st_list_preference_request_method_title">HTTP request method</string>
+    <string name="st_list_preference_request_method_hint">
+        Web requests will be performed using the selected HTTP method
+    </string>
+
 
 
 
