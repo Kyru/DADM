@@ -2,8 +2,10 @@ package fyq.example.labdadm.labs;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Debug;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,19 +23,36 @@ import java.util.ArrayList;
 
 import fyq.example.labdadm.labs.QuotationMethods.QuotationArrayAdapter;
 import fyq.example.labdadm.labs.databases.MySQLiteOpenHelper;
+import fyq.example.labdadm.labs.databases.QuotationDatabase;
 
 public class FavouriteActivity extends AppCompatActivity {
     ListView listView;
     QuotationArrayAdapter quotationArrayAdapter;
     MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
 
+    String database_method;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        quotationArrayAdapter =
-                new QuotationArrayAdapter(this, R.layout.quotation_list_row, sqlhelper.getInstance(this).getQuotations());
+        database_method = prefs.getString("list_preference_database_methods", "");
+
+
+        switch (database_method){
+            case "Room":
+                quotationArrayAdapter =
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().getAllQuotation());
+                break;
+            case "SQLiteOpenHelper":
+                quotationArrayAdapter =
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, sqlhelper.getInstance(this).getQuotations());
+                break;
+        }
+
+
 
         listView = findViewById(R.id.lv_quotations);
         listView.setAdapter(quotationArrayAdapter);
@@ -71,8 +90,17 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Quotation q = (Quotation) parent.getItemAtPosition(position);
+
+                        switch (database_method){
+                            case "Room":
+                                QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().deleteQuotation(q);
+                                break;
+                            case "SQLiteOpenHelper":
+                                sqlhelper.deleteQuotation(q.getQuoteText());
+                                break;
+                        }
                         quotationArrayAdapter.remove(q);
-                        sqlhelper.deleteQuotation(q.getQuoteText());
+
                     }
                 });
 
@@ -143,7 +171,17 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         quotationArrayAdapter.clear();
-                        sqlhelper.deleteAll();
+
+                        switch (database_method){
+                            case "Room":
+                                QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().deleteAllQuotations();
+                                break;
+                            case "SQLiteOpenHelper":
+                                sqlhelper.deleteAll();
+                                break;
+                        }
+
+
                         supportInvalidateOptionsMenu();
                     }
 

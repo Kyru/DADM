@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fyq.example.labdadm.labs.databases.MySQLiteOpenHelper;
+import fyq.example.labdadm.labs.databases.QuotationDatabase;
 
 public class QuotationActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class QuotationActivity extends AppCompatActivity {
     Quotation q;
     MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
 
+    String database_method;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class QuotationActivity extends AppCompatActivity {
         if(savedInstanceState==null) {
 
             authorName = prefs.getString("edit_text_preference_username", "Nameless One");
+            database_method = prefs.getString("list_preference_database_methods", "");
 
             String quote = tv_quote.getText().toString();
             String newQuote = quote.replace("%1s", authorName);
@@ -44,6 +48,8 @@ public class QuotationActivity extends AppCompatActivity {
             tv_author.setText(savedInstanceState.getString("tv_author"));
             num_frases = savedInstanceState.getInt("num_frases");
             add_visible = savedInstanceState.getBoolean("add_visible");
+
+            database_method = savedInstanceState.getString("list_preference_database_methods");
         }
     }
     @Override
@@ -64,13 +70,40 @@ public class QuotationActivity extends AppCompatActivity {
                 tv_quote.setText(getResources().getString(R.string.tv_sample_quote).replace("%1$d"," "+num_frases));
                 num_frases++;
                 menu.findItem(R.id.addtofav_item).setVisible(true);
-                add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
+
+                /*
+
+                * Mi idea era implementar un switch para cada caso de tipo de acceso, pero no se
+                * realmente como funciona el cambio de addvisible, por lo tanto dejo solo el de sqlhelper
+
+                switch(database_method){
+                    case "Room":
+                            if(QuotationDatabase.getInstance(this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null)
+                                add_visible = false;
+                        break;
+                    case "SQLiteOpenHelper": add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
+                        break;
+                }
+                */
+
+                // El método original escrito por Coque
+                //add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
+
                 return super.onOptionsItemSelected(item);
             case R.id.addtofav_item:
                 add_visible=false;
                 item.setVisible(false);
                 q = new Quotation(tv_quote.getText().toString(),tv_author.getText().toString());
-                sqlhelper.addQuotation(q);
+
+                switch (database_method){
+                    case "Room":
+                        QuotationDatabase.getInstance(this).quotationDAO().addQuotation(q);
+                        break;
+                    case "SQLiteOpenHelper":
+                        sqlhelper.addQuotation(q);
+                        break;
+                }
+
                 break;
         }
         return true;
@@ -83,6 +116,8 @@ public class QuotationActivity extends AppCompatActivity {
             savedInstanceState.putString("tv_author", tv_author.getText().toString());
             savedInstanceState.putInt("num_frases",num_frases);
             savedInstanceState.putBoolean("add_visible",add_visible);
+
+            savedInstanceState.putString("list_preference_database_methods", database_method);
 
     }
 

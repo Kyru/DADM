@@ -7,3 +7,5 @@ Ejercicio 2:
 - Que valores hay que inicializar por defecto en los settings (language/HTTP services) creo que
   no se nos inicializa
 - Por qué ya no se nos actualiza lo del "Add" button, de desaparecer si ya es fav quot.
+
+- En el switch de QuotationActivity -> onOptionsItemSelected, el case de Room creo que no esta bien

@@ -25,7 +25,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     // Constructor para crear objetos tipo Helper para manejar la BBDD
     private MySQLiteOpenHelper(Context context){
-        super(context,"quotation_database",null,1);
+        super(context,"quotation_database",null,1); 
 
     }
 
