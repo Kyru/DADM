@@ -20,17 +20,20 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import fyq.example.labdadm.labs.QuotationMethods.QuotationArrayAdapter;
+import fyq.example.labdadm.labs.databases.MySQLiteOpenHelper;
 
 public class FavouriteActivity extends AppCompatActivity {
     ListView listView;
     QuotationArrayAdapter quotationArrayAdapter;
+    MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
         quotationArrayAdapter =
-                new QuotationArrayAdapter(this, R.layout.quotation_list_row, getMockQuotations());
+                new QuotationArrayAdapter(this, R.layout.quotation_list_row, sqlhelper.getInstance(this).getQuotations());
 
         listView = findViewById(R.id.lv_quotations);
         listView.setAdapter(quotationArrayAdapter);
@@ -67,7 +70,9 @@ public class FavouriteActivity extends AppCompatActivity {
                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        quotationArrayAdapter.remove((Quotation) parent.getItemAtPosition(position));
+                        Quotation q = (Quotation) parent.getItemAtPosition(position);
+                        quotationArrayAdapter.remove(q);
+                        sqlhelper.deleteQuotation(q.getQuoteText());
                     }
                 });
 
@@ -138,6 +143,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         quotationArrayAdapter.clear();
+                        sqlhelper.deleteAll();
                         supportInvalidateOptionsMenu();
                     }
 
