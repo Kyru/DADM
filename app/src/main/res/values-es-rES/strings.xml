@@ -61,5 +61,17 @@
         Las peticiones web se harán utilizando el método HTTP seleccionado
     </string>
 
+    <string name="st_preference_category_databases_title">Bases de datos</string>
+    <string name="st_list_preference_database_access_method_title">
+        Modo de acceso a la base de datos
+    </string>
+    <string name="st_list_preference_database_access_method_hint">
+        Se accederá a la base de datos utilizando el método seleccionado
+    </string>
+
+    <string name="st_database_method_room">Room</string>
+    <string name="st_database_method_sqliteopenhelper">SQLiteOpenHelper</string>
+
+
 
 </resources>

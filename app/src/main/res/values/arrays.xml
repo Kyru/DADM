@@ -4,17 +4,30 @@
         <item>@string/st_english</item>
         <item>@string/st_russian</item>
     </array>
-    <array name="methods_http_intern">
-        <item>@string/st_get</item>
-        <item>@string/st_post</item>
-    </array>
+
     <array name="languages_show">
         <item>@string/st_english</item>
         <item>@string/st_russian</item>
     </array>
+
+    <array name="methods_http_intern">
+        <item>@string/st_get</item>
+        <item>@string/st_post</item>
+    </array>
+
     <array name="methods_http_show">
         <item>@string/st_get</item>
         <item>@string/st_post</item>
+    </array>
+
+    <array name="methods_database_access_show">
+        <item>@string/st_database_method_room</item>
+        <item>@string/st_database_method_sqliteopenhelper</item>
+    </array>
+
+    <array name="methods_database_access_intern">
+        <item>@string/st_database_method_room</item>
+        <item>@string/st_database_method_sqliteopenhelper</item>
     </array>
 
 </resources>

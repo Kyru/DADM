@@ -64,6 +64,17 @@
     <string name="st_list_preference_request_method_hint">
         Web requests will be performed using the selected HTTP method
     </string>
+    
+    <string name="st_preference_category_databases_title">Databases</string>
+    <string name="st_list_preference_database_access_method_title">
+        Database access method
+    </string>
+    <string name="st_list_preference_database_access_method_hint">
+        Database will be accessed following the selected method
+    </string>
+
+    <string name="st_database_method_room">Room</string>
+    <string name="st_database_method_sqliteopenhelper">SQLiteOpenHelper</string>
 
 
 
