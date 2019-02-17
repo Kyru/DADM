@@ -8,7 +8,7 @@ import android.content.Context;
 
 import fyq.example.labdadm.labs.Quotation;
 
-@Database(version = 1, entities = Quotation.class)
+@Database(version = 1, entities = {Quotation.class})
 public abstract class QuotationDatabase extends RoomDatabase {
 
     public abstract QuotationDAO quotationDAO();

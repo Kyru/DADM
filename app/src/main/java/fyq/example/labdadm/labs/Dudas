@@ -9,3 +9,6 @@ Ejercicio 2:
 - Por qué ya no se nos actualiza lo del "Add" button, de desaparecer si ya es fav quot.
 
 - En el switch de QuotationActivity -> onOptionsItemSelected, el case de Room creo que no esta bien
+- Hay que dejar algún método de database marcado por defecto al inicializar la aplicación
+  la primer vez? Porque si no se selecciona ninguna siempre fallará hasta que no lo cambies de los
+  ajustes

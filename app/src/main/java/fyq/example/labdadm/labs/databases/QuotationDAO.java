@@ -18,12 +18,12 @@ public interface QuotationDAO {
     @Delete
     void deleteQuotation(Quotation quotation);
 
-    @Query("SELECT * FROM quotation_database")
+    @Query("SELECT * FROM quotation_table")
     List<Quotation> getAllQuotation();
 
-    @Query("SELECT * FROM quotation_database WHERE quote = :quotationText")
+    @Query("SELECT * FROM quotation_table WHERE quote = :quotationText")
     Quotation getQuotation(String quotationText);
 
-    @Query("DELETE FROM quotation_database")
+    @Query("DELETE FROM quotation_table")
     void deleteAllQuotations();
 }

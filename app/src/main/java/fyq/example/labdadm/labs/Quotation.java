@@ -6,7 +6,7 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "quotation_database", indices = {@Index(value = {"quote"}, unique = true)})
+@Entity(tableName = "quotation_table", indices = {@Index(value = {"quote"}, unique = true)})
 public class Quotation {
 
     @PrimaryKey(autoGenerate = true)

@@ -35,7 +35,7 @@
         android:entries="@array/methods_database_access_show"
         android:entryValues="@array/methods_database_access_intern"
         android:key="list_preference_database_methods"
-        android:summary="@string/st_list_preference_language_hint"
-        android:title="@string/st_list_preference_language_title"/>
+        android:summary="@string/st_list_preference_database_access_method_hint"
+        android:title="@string/st_list_preference_database_access_method_title"/>
     </PreferenceCategory>
 </PreferenceScreen>
