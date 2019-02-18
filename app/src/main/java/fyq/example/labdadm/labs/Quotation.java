@@ -2,6 +2,7 @@ package fyq.example.labdadm.labs;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
@@ -31,8 +32,10 @@ public class Quotation {
         this.id = id;
     }
 
+
     public Quotation() {
     }
+
 
     public Quotation(String quoteText, String quoteAuthor) {
         this.quoteText = quoteText;

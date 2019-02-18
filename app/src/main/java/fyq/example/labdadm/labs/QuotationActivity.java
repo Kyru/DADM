@@ -1,9 +1,11 @@
 package fyq.example.labdadm.labs;
 
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,27 +71,22 @@ public class QuotationActivity extends AppCompatActivity {
                 tv_author.setText(getResources().getString(R.string.tv_sample_author).replace("%1$d"," "+num_frases));
                 tv_quote.setText(getResources().getString(R.string.tv_sample_quote).replace("%1$d"," "+num_frases));
                 num_frases++;
-                menu.findItem(R.id.addtofav_item).setVisible(true);
+                add_visible=true;
 
-                /*
 
-                * Mi idea era implementar un switch para cada caso de tipo de acceso, pero no se
-                * realmente como funciona el cambio de addvisible, por lo tanto dejo solo el de sqlhelper
 
                 switch(database_method){
-                    case "Room":
+                    /*case "Room":
                             if(QuotationDatabase.getInstance(this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null)
                                 add_visible = false;
-                        break;
+                            else add_visible = true;
+                        break;*/
                     case "SQLiteOpenHelper": add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
                         break;
                 }
-                */
 
-                // El método original escrito por Coque
-                //add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
-
-                return super.onOptionsItemSelected(item);
+                menu.findItem(R.id.addtofav_item).setVisible(add_visible);
+            return super.onOptionsItemSelected(item);
             case R.id.addtofav_item:
                 add_visible=false;
                 item.setVisible(false);
