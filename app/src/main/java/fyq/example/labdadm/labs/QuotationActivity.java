@@ -40,6 +40,7 @@ public class QuotationActivity extends AppCompatActivity {
 
             authorName = prefs.getString("edit_text_preference_username", "Nameless One");
             database_method = prefs.getString("list_preference_database_methods", "");
+            Log.d("1. method", database_method);
 
             String quote = tv_quote.getText().toString();
             String newQuote = quote.replace("%1s", authorName);
@@ -52,6 +53,7 @@ public class QuotationActivity extends AppCompatActivity {
             add_visible = savedInstanceState.getBoolean("add_visible");
 
             database_method = savedInstanceState.getString("list_preference_database_methods");
+            Log.d("2. method", database_method);
         }
     }
     @Override
@@ -76,11 +78,10 @@ public class QuotationActivity extends AppCompatActivity {
 
 
                 switch(database_method){
-                    /*case "Room":
-                            if(QuotationDatabase.getInstance(this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null)
-                                add_visible = false;
-                            else add_visible = true;
-                        break;*/
+                    case "Room":
+                        String test = tv_quote.getText().toString();
+                        add_visible = QuotationDatabase.getInstance(this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
+                        break;
                     case "SQLiteOpenHelper": add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
                         break;
                 }

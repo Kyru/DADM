@@ -1,13 +1,3 @@
 
 Dudas:
 
-Ejercicio 2:
-
-- No se nos pone Nameless One como valor por defecto del nombre de usuario
-- Que valores hay que inicializar por defecto en los settings (language/HTTP services) creo que
-  no se nos inicializa
-
-- En el switch de QuotationActivity -> onOptionsItemSelected, el case de Room creo que no esta bien
-- Hay que dejar algún método de database marcado por defecto al inicializar la aplicación
-  la primer vez? Porque si no se selecciona ninguna siempre fallará hasta que no lo cambies de los
-  ajustes

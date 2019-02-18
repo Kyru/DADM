@@ -12,14 +12,14 @@
         android:title="@string/st_preference_category_web_services_title">
 
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="@string/st_english"
             android:entries="@array/languages_show"
             android:entryValues="@array/languages_intern"
             android:key="list_preference_languages"
             android:summary="@string/st_list_preference_language_hint"
             android:title="@string/st_list_preference_language_title"/>
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="@string/st_get"
             android:entries="@array/methods_http_show"
             android:entryValues="@array/methods_http_intern"
             android:key="list_preference_methods_http"
@@ -31,7 +31,7 @@
         android:title="@string/st_preference_category_databases_title">
 
     <ListPreference
-        android:defaultValue="1"
+        android:defaultValue="@string/st_database_method_room"
         android:entries="@array/methods_database_access_show"
         android:entryValues="@array/methods_database_access_intern"
         android:key="list_preference_database_methods"
