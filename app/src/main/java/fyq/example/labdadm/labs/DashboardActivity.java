@@ -22,8 +22,13 @@ public class DashboardActivity extends AppCompatActivity {
             firstRun = false;
             SharedPreferences.Editor editor = sp.edit();
             editor.putBoolean("first_run",firstRun).apply();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    QuotationDatabase.getInstance(DashboardActivity.this).quotationDAO().getAllQuotation();
+                }
+            }).start();
 
-            QuotationDatabase.getInstance(this).quotationDAO().getAllQuotation();
         }
     }
 

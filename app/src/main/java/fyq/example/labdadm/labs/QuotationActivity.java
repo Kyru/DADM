@@ -75,16 +75,20 @@ public class QuotationActivity extends AppCompatActivity {
                 num_frases++;
                 add_visible=true;
 
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch(database_method){
+                            case "Room":
+                                        String test = tv_quote.getText().toString();
+                                        add_visible = QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
 
-
-                switch(database_method){
-                    case "Room":
-                        String test = tv_quote.getText().toString();
-                        add_visible = QuotationDatabase.getInstance(this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
-                        break;
-                    case "SQLiteOpenHelper": add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
-                        break;
-                }
+                                break;
+                            case "SQLiteOpenHelper": add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
+                                break;
+                        }
+                    }
+                }).start();
 
                 menu.findItem(R.id.addtofav_item).setVisible(add_visible);
             return super.onOptionsItemSelected(item);
@@ -93,14 +97,19 @@ public class QuotationActivity extends AppCompatActivity {
                 item.setVisible(false);
                 q = new Quotation(tv_quote.getText().toString(),tv_author.getText().toString());
 
-                switch (database_method){
-                    case "Room":
-                        QuotationDatabase.getInstance(this).quotationDAO().addQuotation(q);
-                        break;
-                    case "SQLiteOpenHelper":
-                        sqlhelper.addQuotation(q);
-                        break;
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (database_method){
+                            case "Room":
+                                QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().addQuotation(q);
+                                break;
+                            case "SQLiteOpenHelper":
+                                sqlhelper.addQuotation(q);
+                                break;
+                        }
+                    }
+                }).start();
 
                 break;
         }

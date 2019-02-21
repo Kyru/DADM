@@ -29,7 +29,7 @@ public class FavouriteActivity extends AppCompatActivity {
     ListView listView;
     QuotationArrayAdapter quotationArrayAdapter;
     MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
-
+    Quotation q;
     String database_method;
 
     @Override
@@ -45,10 +45,12 @@ public class FavouriteActivity extends AppCompatActivity {
             case "Room":
                 quotationArrayAdapter =
                         new QuotationArrayAdapter(this, R.layout.quotation_list_row, QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().getAllQuotation());
+
+
                 break;
             case "SQLiteOpenHelper":
                 quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, sqlhelper.getInstance(this).getQuotations());
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, sqlhelper.getInstance(FavouriteActivity.this).getQuotations());
                 break;
         }
 
@@ -89,16 +91,23 @@ public class FavouriteActivity extends AppCompatActivity {
                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Quotation q = (Quotation) parent.getItemAtPosition(position);
+                        q = (Quotation) parent.getItemAtPosition(position);
 
-                        switch (database_method){
-                            case "Room":
-                                QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().deleteQuotation(q);
-                                break;
-                            case "SQLiteOpenHelper":
-                                sqlhelper.deleteQuotation(q.getQuoteText());
-                                break;
-                        }
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                switch (database_method){
+                                    case "Room":
+                                        QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().deleteQuotation(q);
+                                        break;
+                                    case "SQLiteOpenHelper":
+                                        sqlhelper.deleteQuotation(q.getQuoteText());
+                                        break;
+                                }
+                            }
+                         }).start();
+
                         quotationArrayAdapter.remove(q);
 
                     }
@@ -171,17 +180,19 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         quotationArrayAdapter.clear();
-
-                        switch (database_method){
-                            case "Room":
-                                QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().deleteAllQuotations();
-                                break;
-                            case "SQLiteOpenHelper":
-                                sqlhelper.deleteAll();
-                                break;
-                        }
-
-
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                switch (database_method){
+                                    case "Room":
+                                        QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().deleteAllQuotations();
+                                        break;
+                                    case "SQLiteOpenHelper":
+                                        sqlhelper.deleteAll();
+                                        break;
+                                }
+                            }
+                        }).start();
                         supportInvalidateOptionsMenu();
                     }
 
