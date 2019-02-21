@@ -91,7 +91,7 @@ public class QuotationActivity extends AppCompatActivity {
                 }).start();
 
                 menu.findItem(R.id.addtofav_item).setVisible(add_visible);
-            return super.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
             case R.id.addtofav_item:
                 add_visible=false;
                 item.setVisible(false);

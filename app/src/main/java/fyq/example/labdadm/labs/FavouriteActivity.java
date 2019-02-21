@@ -20,10 +20,12 @@ import android.widget.Toast;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import fyq.example.labdadm.labs.QuotationMethods.QuotationArrayAdapter;
 import fyq.example.labdadm.labs.databases.MySQLiteOpenHelper;
 import fyq.example.labdadm.labs.databases.QuotationDatabase;
+import fyq.example.labdadm.labs.tasks.QuotationAsyncTask;
 
 public class FavouriteActivity extends AppCompatActivity {
     ListView listView;
@@ -40,17 +42,18 @@ public class FavouriteActivity extends AppCompatActivity {
 
         database_method = prefs.getString("list_preference_database_methods", "");
 
+        List<Quotation> quotationList = new ArrayList<Quotation>();
 
         switch (database_method){
             case "Room":
                 quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, QuotationDatabase.getInstance(FavouriteActivity.this).quotationDAO().getAllQuotation());
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, quotationList);
 
 
                 break;
             case "SQLiteOpenHelper":
                 quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, sqlhelper.getInstance(FavouriteActivity.this).getQuotations());
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, quotationList);
                 break;
         }
 
@@ -118,6 +121,26 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         });
 
+
+        QuotationAsyncTask quotationAsyncTask = new QuotationAsyncTask(this);
+        quotationAsyncTask.execute();
+    }
+
+    public void fillAdapter(List<Quotation> listQuotation){
+        switch (database_method){
+            case "Room":
+                quotationArrayAdapter =
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, listQuotation);
+
+
+                break;
+            case "SQLiteOpenHelper":
+                quotationArrayAdapter =
+                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, listQuotation);
+                break;
+        }
+
+        supportInvalidateOptionsMenu();
     }
 
     public void findAuthor(View view, String authorName) {
