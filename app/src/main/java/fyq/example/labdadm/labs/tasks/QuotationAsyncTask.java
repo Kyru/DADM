@@ -16,7 +16,7 @@ public class QuotationAsyncTask extends AsyncTask<Boolean , Void, List<Quotation
     private WeakReference<FavouriteActivity> weakReferenceFav;
 
     public QuotationAsyncTask(FavouriteActivity fav){
-        this.weakReferenceFav = new WeakReference<>(fav);
+        this.weakReferenceFav = new WeakReference(fav);
     }
 
 
@@ -29,7 +29,7 @@ public class QuotationAsyncTask extends AsyncTask<Boolean , Void, List<Quotation
 
             int cont = booleans.length;
 
-            for(int i = 0; i <= cont; i++) {
+            for(int i = 0; i < cont; i++) {
                 if (booleans[i]) {
                     quotationList = QuotationDatabase.getInstance(weakReferenceFav.get().getApplicationContext()).quotationDAO().getAllQuotation();
                 } else {

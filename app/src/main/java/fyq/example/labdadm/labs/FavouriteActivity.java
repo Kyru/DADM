@@ -33,6 +33,7 @@ public class FavouriteActivity extends AppCompatActivity {
     MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
     Quotation q;
     String database_method;
+    boolean database_method_async;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,14 @@ public class FavouriteActivity extends AppCompatActivity {
             case "Room":
                 quotationArrayAdapter =
                         new QuotationArrayAdapter(this, R.layout.quotation_list_row, quotationList);
+                database_method_async = true;
 
 
                 break;
             case "SQLiteOpenHelper":
                 quotationArrayAdapter =
                         new QuotationArrayAdapter(this, R.layout.quotation_list_row, quotationList);
+                database_method_async = false;
                 break;
         }
 
@@ -123,7 +126,7 @@ public class FavouriteActivity extends AppCompatActivity {
 
 
         QuotationAsyncTask quotationAsyncTask = new QuotationAsyncTask(this);
-        quotationAsyncTask.execute();
+        quotationAsyncTask.execute(database_method_async);
     }
 
     public void fillAdapter(List<Quotation> listQuotation){
@@ -140,7 +143,7 @@ public class FavouriteActivity extends AppCompatActivity {
                 break;
         }
 
-        supportInvalidateOptionsMenu();
+        listView.setAdapter(quotationArrayAdapter);
     }
 
     public void findAuthor(View view, String authorName) {

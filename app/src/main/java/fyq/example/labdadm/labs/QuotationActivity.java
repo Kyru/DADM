@@ -80,11 +80,10 @@ public class QuotationActivity extends AppCompatActivity {
                     public void run() {
                         switch(database_method){
                             case "Room":
-                                        String test = tv_quote.getText().toString();
                                         add_visible = QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
-
                                 break;
-                            case "SQLiteOpenHelper": add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
+                            case "SQLiteOpenHelper":
+                                        add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
                                 break;
                         }
                     }
