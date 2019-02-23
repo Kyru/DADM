@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Debug;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URLEncoder;
@@ -25,7 +23,7 @@ import java.util.List;
 import fyq.example.labdadm.labs.QuotationMethods.QuotationArrayAdapter;
 import fyq.example.labdadm.labs.databases.MySQLiteOpenHelper;
 import fyq.example.labdadm.labs.databases.QuotationDatabase;
-import fyq.example.labdadm.labs.tasks.QuotationAsyncTask;
+import fyq.example.labdadm.labs.tasks.FavouriteAsyncTask;
 
 public class FavouriteActivity extends AppCompatActivity {
     ListView listView;
@@ -125,8 +123,8 @@ public class FavouriteActivity extends AppCompatActivity {
         });
 
 
-        QuotationAsyncTask quotationAsyncTask = new QuotationAsyncTask(this);
-        quotationAsyncTask.execute(database_method_async);
+        FavouriteAsyncTask favouriteAsyncTask = new FavouriteAsyncTask(this);
+        favouriteAsyncTask.execute(database_method_async);
     }
 
     public void fillAdapter(List<Quotation> listQuotation){

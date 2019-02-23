@@ -1,3 +1,5 @@
 
 Dudas:
 
++ Al usar threads para la comprabación de si esta una quotation en la base de datos. No se actualiza
+correctamente el addToFav. ¿Cómo podemos hacer para que ocurra despues del thread?

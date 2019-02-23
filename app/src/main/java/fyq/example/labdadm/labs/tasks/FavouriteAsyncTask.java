@@ -11,11 +11,11 @@ import fyq.example.labdadm.labs.Quotation;
 import fyq.example.labdadm.labs.databases.MySQLiteOpenHelper;
 import fyq.example.labdadm.labs.databases.QuotationDatabase;
 
-public class QuotationAsyncTask extends AsyncTask<Boolean , Void, List<Quotation>> {
+public class FavouriteAsyncTask extends AsyncTask<Boolean , Void, List<Quotation>> {
 
     private WeakReference<FavouriteActivity> weakReferenceFav;
 
-    public QuotationAsyncTask(FavouriteActivity fav){
+    public FavouriteAsyncTask(FavouriteActivity fav){
         this.weakReferenceFav = new WeakReference(fav);
     }
 
