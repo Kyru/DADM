@@ -27,7 +27,8 @@ public class QuotationAsynTask extends AsyncTask<String, Void, Quotation> {
 
     @Override
     protected Quotation doInBackground(String... strings) {
-        Quotation quotation=null;
+        //Quotation quotation = new Quotation("test", "test");
+        Quotation quotation = null;
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("http");
         builder.authority("api.forismatic.com");
