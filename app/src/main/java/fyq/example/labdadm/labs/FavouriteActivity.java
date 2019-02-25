@@ -44,26 +44,6 @@ public class FavouriteActivity extends AppCompatActivity {
 
         quotationList = new ArrayList<Quotation>();
 
-        /*
-        // ESTO SE PUEDE BORRAR
-
-        switch (database_method){
-            case "Room":
-                quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, quotationList);
-                database_method_async = true;
-
-
-                break;
-            case "SQLiteOpenHelper":
-                quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, quotationList);
-                database_method_async = false;
-                break;
-        }
-        */
-
-
         listView = findViewById(R.id.lv_quotations);
         listView.setAdapter(quotationArrayAdapter);
 

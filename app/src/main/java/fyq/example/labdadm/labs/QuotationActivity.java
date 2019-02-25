@@ -1,6 +1,8 @@
 package fyq.example.labdadm.labs;
 
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -30,6 +32,7 @@ public class QuotationActivity extends AppCompatActivity {
     MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
     Handler handler;
     String database_method;
+    String language;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class QuotationActivity extends AppCompatActivity {
 
             authorName = prefs.getString("edit_text_preference_username", "Nameless One");
             database_method = prefs.getString("list_preference_database_methods", "Room");
-            Log.d("1. method", database_method);
+            language = prefs.getString("list_preference_languages", "English");
 
             String quote = tv_quote.getText().toString();
             String newQuote = quote.replace("%1s", authorName);
@@ -60,7 +63,7 @@ public class QuotationActivity extends AppCompatActivity {
             add_visible = savedInstanceState.getBoolean("add_visible");
 
             database_method = savedInstanceState.getString("list_preference_database_methods");
-            Log.d("2. method", database_method);
+            language = savedInstanceState.getString("list_preference_languages");
         }
     }
     @Override
@@ -92,7 +95,6 @@ public class QuotationActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.INVISIBLE);
 
-        // No se si esto funcionará ya que en el método de onOptionsItemSelected no funciona bien
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -108,7 +110,6 @@ public class QuotationActivity extends AppCompatActivity {
 
         }).start();
 
-        //menu.findItem(R.id.addtofav_item).setVisible(add_visible);
         menu.findItem(R.id.addtofav_item).setVisible(true);
 
     }
@@ -122,37 +123,31 @@ public class QuotationActivity extends AppCompatActivity {
             case R.id.getquot_item:
 
                 QuotationAsynTask quotationAsynTask = new QuotationAsynTask(QuotationActivity.this);
-                quotationAsynTask.execute();
-
-
-                //tv_author.setText(getResources().getString(R.string.tv_sample_author).replace("%1$d"," "+num_frases));
-                //tv_quote.setText(getResources().getString(R.string.tv_sample_quote).replace("%1$d"," "+num_frases));
-
+                quotationAsynTask.execute(language);
 
                 add_visible=true;
-
-                // Cuando metemos esta condición en un thread, no se actualiza correctamente el addtofav
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        switch(database_method){
-                            case "Room":
-                                        add_visible = QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
-                                break;
-                            case "SQLiteOpenHelper":
-                                        add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
-                                break;
-                        }
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                menu.findItem(R.id.addtofav_item).setVisible(add_visible);
+                if(isNetworkConnected()) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch (database_method) {
+                                case "Room":
+                                    add_visible = QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
+                                    break;
+                                case "SQLiteOpenHelper":
+                                    add_visible = !sqlhelper.isInDatabase(tv_quote.getText().toString());
+                                    break;
                             }
-                        });
-                    }
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    menu.findItem(R.id.addtofav_item).setVisible(add_visible);
+                                }
+                            });
+                        }
 
-                }).start();
-
+                    }).start();
+                }
 
 
                 return super.onOptionsItemSelected(item);
@@ -176,7 +171,7 @@ public class QuotationActivity extends AppCompatActivity {
                     }
                 }).start();
 
-                break;  // switch(item.getItemId() break
+                break;
         }
         return true;
     }
@@ -189,8 +184,14 @@ public class QuotationActivity extends AppCompatActivity {
             savedInstanceState.putBoolean("add_visible",add_visible);
 
             savedInstanceState.putString("list_preference_database_methods", database_method);
+            savedInstanceState.putString("list_preference_languages", language);
 
     }
 
+    public boolean isNetworkConnected() {
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        return ((info != null) && (info.isConnected()));
+    }
 
 }
