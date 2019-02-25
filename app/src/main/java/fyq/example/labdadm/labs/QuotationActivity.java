@@ -2,6 +2,7 @@ package fyq.example.labdadm.labs;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -27,7 +28,7 @@ public class QuotationActivity extends AppCompatActivity {
     Menu menu;
     Quotation q;
     MySQLiteOpenHelper sqlhelper = MySQLiteOpenHelper.getInstance(this);
-
+    Handler handler;
     String database_method;
 
     @Override
@@ -40,10 +41,13 @@ public class QuotationActivity extends AppCompatActivity {
         scrollViewQuotation = findViewById(R.id.scrollViewQuotation);
         progressBar = findViewById(R.id.progressBarQuotation);
         add_visible = false;
+
+        handler = new Handler();
+
         if(savedInstanceState==null) {
 
             authorName = prefs.getString("edit_text_preference_username", "Nameless One");
-            database_method = prefs.getString("list_preference_database_methods", "");
+            database_method = prefs.getString("list_preference_database_methods", "Room");
             Log.d("1. method", database_method);
 
             String quote = tv_quote.getText().toString();
@@ -120,10 +124,10 @@ public class QuotationActivity extends AppCompatActivity {
                 QuotationAsynTask quotationAsynTask = new QuotationAsynTask(QuotationActivity.this);
                 quotationAsynTask.execute();
 
-                /*
-                tv_author.setText(getResources().getString(R.string.tv_sample_author).replace("%1$d"," "+num_frases));
-                tv_quote.setText(getResources().getString(R.string.tv_sample_quote).replace("%1$d"," "+num_frases));
-                num_frases++;
+
+                //tv_author.setText(getResources().getString(R.string.tv_sample_author).replace("%1$d"," "+num_frases));
+                //tv_quote.setText(getResources().getString(R.string.tv_sample_quote).replace("%1$d"," "+num_frases));
+
 
                 add_visible=true;
 
@@ -139,14 +143,20 @@ public class QuotationActivity extends AppCompatActivity {
                                         add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
                                 break;
                         }
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                menu.findItem(R.id.addtofav_item).setVisible(add_visible);
+                            }
+                        });
                     }
 
                 }).start();
 
-                menu.findItem(R.id.addtofav_item).setVisible(add_visible);
+
 
                 return super.onOptionsItemSelected(item);
-                */
+
             case R.id.addtofav_item:
                 add_visible=false;
                 item.setVisible(false);

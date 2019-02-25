@@ -32,6 +32,7 @@ public class FavouriteActivity extends AppCompatActivity {
     Quotation q;
     String database_method;
     boolean database_method_async;
+    List<Quotation> quotationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,12 @@ public class FavouriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favourite);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        database_method = prefs.getString("list_preference_database_methods", "");
+        database_method = prefs.getString("list_preference_database_methods", "Room");
 
-        List<Quotation> quotationList = new ArrayList<Quotation>();
+        quotationList = new ArrayList<Quotation>();
+
+        /*
+        // ESTO SE PUEDE BORRAR
 
         switch (database_method){
             case "Room":
@@ -57,7 +61,7 @@ public class FavouriteActivity extends AppCompatActivity {
                 database_method_async = false;
                 break;
         }
-
+        */
 
 
         listView = findViewById(R.id.lv_quotations);
