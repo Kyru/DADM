@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import fyq.example.labdadm.labs.Quotation;
 import fyq.example.labdadm.labs.QuotationActivity;
 
@@ -30,10 +32,11 @@ public class QuotationAsynTask extends AsyncTask<String, Void, Quotation> {
         //Quotation quotation = new Quotation("test", "test");
         Quotation quotation = null;
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme("http");
+        builder.scheme("https");
         builder.authority("api.forismatic.com");
         builder.appendPath("api");
         builder.appendPath("1.0");
+        builder.appendPath("");
         builder.appendQueryParameter("method", "getQuote");
         builder.appendQueryParameter("format", "json");
         if(strings[0].equals("English")) {
@@ -42,12 +45,10 @@ public class QuotationAsynTask extends AsyncTask<String, Void, Quotation> {
 
         try {
             URL url = new URL(builder.build().toString());
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setDoInput(true);
-            Log.d("1. ",""+connection.getResponseCode());
 
-            Log.d("2. ",""+HttpURLConnection.HTTP_OK);
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 Gson gson = new Gson();
