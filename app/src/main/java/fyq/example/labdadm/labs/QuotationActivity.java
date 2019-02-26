@@ -3,6 +3,7 @@ package fyq.example.labdadm.labs;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -33,6 +34,8 @@ public class QuotationActivity extends AppCompatActivity {
     Handler handler;
     String database_method;
     String language;
+    String http_method;
+    QuotationAsynTask quotationAsynTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,8 @@ public class QuotationActivity extends AppCompatActivity {
 
             authorName = prefs.getString("edit_text_preference_username", "Nameless One");
             database_method = prefs.getString("list_preference_database_methods", "Room");
-            language = prefs.getString("list_preference_languages", "English");
+            language = prefs.getString("list_preference_languages", getResources().getString(R.string.st_english));
+            http_method = prefs.getString("list_preference_methods_http", "GET");
 
             String quote = tv_quote.getText().toString();
             String newQuote = quote.replace("%1s", authorName);
@@ -64,6 +68,7 @@ public class QuotationActivity extends AppCompatActivity {
 
             database_method = savedInstanceState.getString("list_preference_database_methods");
             language = savedInstanceState.getString("list_preference_languages");
+            http_method = savedInstanceState.getString("list_preference_methods_http");
         }
     }
     @Override
@@ -106,11 +111,16 @@ public class QuotationActivity extends AppCompatActivity {
                         add_visible= !sqlhelper.isInDatabase(tv_quote.getText().toString());
                         break;
                 }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        menu.findItem(R.id.addtofav_item).setVisible(add_visible);
+                    }
+                });
             }
 
         }).start();
 
-        menu.findItem(R.id.addtofav_item).setVisible(true);
 
     }
 
@@ -122,20 +132,21 @@ public class QuotationActivity extends AppCompatActivity {
             case android.R.id.home: return super.onOptionsItemSelected(item);
             case R.id.getquot_item:
 
-                QuotationAsynTask quotationAsynTask = new QuotationAsynTask(QuotationActivity.this);
-                quotationAsynTask.execute(language);
+                quotationAsynTask = new QuotationAsynTask(QuotationActivity.this);
+                String [] args = {language, http_method};
+                quotationAsynTask.execute(args);
 
-                add_visible=true;
+                add_visible = false;
                 if(isNetworkConnected()) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             switch (database_method) {
                                 case "Room":
-                                    add_visible = QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) == null;
+                                    add_visible = QuotationDatabase.getInstance(QuotationActivity.this).quotationDAO().getQuotation(tv_quote.getText().toString()) != null;
                                     break;
                                 case "SQLiteOpenHelper":
-                                    add_visible = !sqlhelper.isInDatabase(tv_quote.getText().toString());
+                                    add_visible = sqlhelper.isInDatabase(tv_quote.getText().toString());
                                     break;
                             }
                             handler.post(new Runnable() {
@@ -148,7 +159,6 @@ public class QuotationActivity extends AppCompatActivity {
 
                     }).start();
                 }
-
 
                 return super.onOptionsItemSelected(item);
 
@@ -185,7 +195,7 @@ public class QuotationActivity extends AppCompatActivity {
 
             savedInstanceState.putString("list_preference_database_methods", database_method);
             savedInstanceState.putString("list_preference_languages", language);
-
+            savedInstanceState.putString("list_preference_methods_http", http_method);
     }
 
     public boolean isNetworkConnected() {
@@ -194,4 +204,11 @@ public class QuotationActivity extends AppCompatActivity {
         return ((info != null) && (info.isConnected()));
     }
 
+    @Override
+    public void onDestroy() {
+        if(quotationAsynTask!=null && quotationAsynTask.getStatus()== AsyncTask.Status.RUNNING){
+            quotationAsynTask.cancel(true);
+        }
+        super.onDestroy();
+    }
 }

@@ -43,7 +43,7 @@ public class FavouriteActivity extends AppCompatActivity {
         database_method = prefs.getString("list_preference_database_methods", "Room");
 
         quotationList = new ArrayList<Quotation>();
-
+        quotationArrayAdapter = new QuotationArrayAdapter(this,R.layout.quotation_list_row,quotationList);
         listView = findViewById(R.id.lv_quotations);
         listView.setAdapter(quotationArrayAdapter);
 
@@ -112,20 +112,8 @@ public class FavouriteActivity extends AppCompatActivity {
     }
 
     public void fillAdapter(List<Quotation> listQuotation){
-        switch (database_method){
-            case "Room":
-                quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, listQuotation);
-
-
-                break;
-            case "SQLiteOpenHelper":
-                quotationArrayAdapter =
-                        new QuotationArrayAdapter(this, R.layout.quotation_list_row, listQuotation);
-                break;
-        }
-
-        listView.setAdapter(quotationArrayAdapter);
+        quotationArrayAdapter.clear();
+        quotationArrayAdapter.addAll(listQuotation);
     }
 
     public void findAuthor(View view, String authorName) {
@@ -146,20 +134,6 @@ public class FavouriteActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<Quotation> getMockQuotations() {
-
-        ArrayList<Quotation> mockListQuotation = new ArrayList<>();
-        Quotation mockQuotation = new Quotation("if you want to impress someone put him on your black list",
-                "Johnnie Walker");
-        for (int i = 0; i < 10; i++) {
-            mockListQuotation.add(mockQuotation);
-        }
-
-        Quotation nullQuotation = new Quotation("This is a null quotation", "");
-        mockListQuotation.add(nullQuotation);
-
-        return mockListQuotation;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

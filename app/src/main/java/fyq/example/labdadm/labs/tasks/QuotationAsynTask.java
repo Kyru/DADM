@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -18,6 +19,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import fyq.example.labdadm.labs.Quotation;
 import fyq.example.labdadm.labs.QuotationActivity;
+import fyq.example.labdadm.labs.R;
 
 public class QuotationAsynTask extends AsyncTask<String, Void, Quotation> {
 
@@ -29,26 +31,48 @@ public class QuotationAsynTask extends AsyncTask<String, Void, Quotation> {
 
     @Override
     protected Quotation doInBackground(String... strings) {
-        //Quotation quotation = new Quotation("test", "test");
+
         Quotation quotation = null;
+        String postParameters="";
+
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https");
         builder.authority("api.forismatic.com");
         builder.appendPath("api");
         builder.appendPath("1.0");
         builder.appendPath("");
-        builder.appendQueryParameter("method", "getQuote");
-        builder.appendQueryParameter("format", "json");
-        if(strings[0].equals("English")) {
-            builder.appendQueryParameter("lang", "en");
-        } else builder.appendQueryParameter("lang", "ru");
 
+        String lang = weakReferenceQuotation.get().getResources().getString(R.string.st_english);
+        String method_http_post = weakReferenceQuotation.get().getResources().getString(R.string.st_post);
+        String method_http_get = weakReferenceQuotation.get().getResources().getString(R.string.st_get);
+
+        if(strings[1].equals(method_http_get)) {
+            builder.appendQueryParameter("method", "getQuote");
+            builder.appendQueryParameter("format", "json");
+            if (strings[0].equals(lang)) {
+                builder.appendQueryParameter("lang", "en");
+            } else builder.appendQueryParameter("lang", "ru");
+        }
+        else{
+            postParameters = "method=getQuote&format=json&lang=";
+
+            if (strings[0].equals(lang)) {
+                postParameters+="en";
+            } else postParameters+="ru";
+        }
         try {
             URL url = new URL(builder.build().toString());
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod(strings[1]);
             connection.setDoInput(true);
 
+            if(strings[1].equals(method_http_post)){
+                connection.setDoOutput(true);
+                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                writer.write(postParameters);
+                writer.flush();
+                writer.close();
+            }
             if(connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 Gson gson = new Gson();
@@ -72,11 +96,10 @@ public class QuotationAsynTask extends AsyncTask<String, Void, Quotation> {
 
     @Override
     protected void onPostExecute(Quotation quotation) {
-        // Cita de prueba para comprobar que funciona correctamente
-        // borrar cuando empecemos con el ej3
-        //quotation = new Quotation("Verdades como panes", "Ferran");
+
         if(weakReferenceQuotation != null){
             weakReferenceQuotation.get().hideProgressBar(quotation);
         }
     }
+
 }
