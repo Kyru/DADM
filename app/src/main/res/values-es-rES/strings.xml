@@ -14,7 +14,7 @@
 
     <string name="bt_author_info">Información del autor</string>
 
-    <string name="tv_quote">Hola %1s!\nPress Actualiza para obtener una nueva frase</string>
+    <string name="tv_quote">Hola %1s!\nPulsa "Actualizar" para obtener una nueva frase</string>
 
     <string name="tv_sample_quote">Frase de prueba %1$d</string>
 
