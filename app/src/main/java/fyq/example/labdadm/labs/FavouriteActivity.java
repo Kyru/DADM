@@ -41,6 +41,8 @@ public class FavouriteActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         database_method = prefs.getString("list_preference_database_methods", "Room");
+        if(database_method.equals("Room")) database_method_async=true;
+        else database_method_async = false;
 
         quotationList = new ArrayList<Quotation>();
         quotationArrayAdapter = new QuotationArrayAdapter(this,R.layout.quotation_list_row,quotationList);
@@ -80,7 +82,7 @@ public class FavouriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         q = (Quotation) parent.getItemAtPosition(position);
-
+                        quotationArrayAdapter.remove(q);
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -96,7 +98,8 @@ public class FavouriteActivity extends AppCompatActivity {
                             }
                          }).start();
 
-                        quotationArrayAdapter.remove(q);
+
+                        supportInvalidateOptionsMenu();
 
                     }
                 });
@@ -139,6 +142,7 @@ public class FavouriteActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menufavquot, menu);
         if(quotationArrayAdapter.getCount()==0) menu.findItem(R.id.clearall).setVisible(false);
+        else menu.findItem(R.id.clearall).setVisible(true);
         return true;
     }
 
